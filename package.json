@@ -1,0 +1,19 @@
+{
+  "name": "ex_heroicons",
+  "version": "0.1.0",
+  "description": "**TODO: Add description**",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "dependencies": {
+    "heroicons": "^1.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
