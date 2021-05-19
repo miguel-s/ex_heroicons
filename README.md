@@ -32,5 +32,5 @@ Then run `mix deps.get`.
 ### With Surface
 
 ```elixir
-{{ Heroicons.icon("outline", "academic-cap", class: "h-4 w-4") }}
+<Heroicons.Components.Icon type="outline" name="academic-cap" class="h-4 w-4" />
 ```
