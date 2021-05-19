@@ -23,7 +23,8 @@ defmodule Heroicons.MixProject do
   defp deps do
     [
       {:phoenix_html, "~> 2.14"},
-      {:ex_doc, "~> 0.24", only: :dev, runtime: false}
+      {:ex_doc, "~> 0.24", only: :dev, runtime: false},
+      {:surface, "~> 0.4", optional: true}
     ]
   end
 
