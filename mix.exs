@@ -28,12 +28,10 @@ defmodule Heroicons.MixProject do
 
   defp description() do
     """
-    This package adds a convenient way of using [Heroicons](https://heroicons.com/) with your Phoenix, Phoenix LiveView and Surface applications.
+    This package adds a convenient way of using Heroicons with your Phoenix, Phoenix LiveView and Surface applications.
 
     Heroicons is "A set of 450+ free MIT-licensed high-quality SVG icons for you to use in your web projects."
-    Created by the amazing folks at [Tailwind Labs](https://github.com/tailwindlabs)
-
-    You can find the original docs [here](https://heroicons.com) and repo [here](https://github.com/tailwindlabs/heroicons).
+    Created by the amazing folks at Tailwind Labs.
     """
   end
 
