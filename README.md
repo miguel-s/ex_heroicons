@@ -1,11 +1,15 @@
 # Heroicons
 
-**TODO: Add description**
+This package adds a convenient way of using [Heroicons](https://heroicons.com/) with your Phoenix, Phoenix LiveView and Surface applications.
+
+Heroicons is "A set of 450+ free MIT-licensed high-quality SVG icons for you to use in your web projects."
+Created by the amazing folks at [Tailwind Labs](https://github.com/tailwindlabs)
+
+You can find the original docs [here](https://heroicons.com) and repo [here](https://github.com/tailwindlabs/heroicons).
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `ex_heroicons` to your list of dependencies in `mix.exs`:
+Add `ex_heroicons` to the list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
@@ -15,6 +19,18 @@ def deps do
 end
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/ex_heroicons](https://hexdocs.pm/ex_heroicons).
+Then run `mix deps.get`.
+
+## Usage
+
+### With Eex or Leex
+
+```elixir
+<%= Heroicons.icon("outline", "academic-cap", class: "h-4 w-4") %>
+```
+
+### With Surface
+
+```elixir
+{{ Heroicons.icon("outline", "academic-cap", class: "h-4 w-4") }}
+```

@@ -1,7 +1,7 @@
 {
   "name": "ex_heroicons",
   "version": "0.1.0",
-  "description": "**TODO: Add description**",
+  "description": "ex_heroicons",
   "main": "index.js",
   "directories": {
     "lib": "lib",

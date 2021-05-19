@@ -7,7 +7,10 @@ defmodule Heroicons.MixProject do
       version: "0.1.0",
       elixir: "~> 1.11",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      description: description(),
+      package: package(),
+      source_url: "https://github.com/miguel-s/ex_heroicons"
     ]
   end
 
@@ -21,5 +24,24 @@ defmodule Heroicons.MixProject do
     [
       {:phoenix_html, "~> 2.14"}
     ]
+  end
+
+  defp description() do
+    """
+    This package adds a convenient way of using [Heroicons](https://heroicons.com/) with your Phoenix, Phoenix LiveView and Surface applications.
+
+    Heroicons is "A set of 450+ free MIT-licensed high-quality SVG icons for you to use in your web projects."
+    Created by the amazing folks at [Tailwind Labs](https://github.com/tailwindlabs)
+
+    You can find the original docs [here](https://heroicons.com) and repo [here](https://github.com/tailwindlabs/heroicons).
+    """
+  end
+
+  defp package do
+    %{
+      name: "Heroicons",
+      licenses: ["MIT"],
+      links: %{"GitHub" => "https://github.com/miguel-s/ex_heroicons"}
+    }
   end
 end
