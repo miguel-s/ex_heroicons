@@ -10,6 +10,7 @@ defmodule Heroicons.MixProject do
       deps: deps(),
       description: description(),
       package: package(),
+      name: "Heroicons",
       source_url: "https://github.com/miguel-s/ex_heroicons"
     ]
   end
@@ -38,7 +39,7 @@ defmodule Heroicons.MixProject do
 
   defp package do
     %{
-      name: "Heroicons",
+      name: "heroicons",
       licenses: ["MIT"],
       links: %{"GitHub" => "https://github.com/miguel-s/ex_heroicons"}
     }
