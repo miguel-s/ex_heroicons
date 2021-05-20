@@ -12,8 +12,14 @@ if Code.ensure_loaded?(Surface) do
     prop class, :css_class
 
     def render(assigns) do
+      opts =
+        case Map.get(assigns, :class) do
+          nil -> []
+          class -> [class: Surface.css_class(class)]
+        end
+
       ~H"""
-      {{ Heroicons.icon(@type, @name, class: Surface.css_class(@class)) }}
+      {{ Heroicons.icon(@type, @name, opts) }}
       """
     end
   end

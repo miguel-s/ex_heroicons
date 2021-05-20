@@ -1,5 +1,5 @@
 defmodule HeroiconsTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   doctest Heroicons
 
   test "renders icon" do
