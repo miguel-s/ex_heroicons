@@ -24,7 +24,8 @@ defmodule Heroicons.MixProject do
     [
       {:phoenix_html, "~> 2.14"},
       {:ex_doc, "~> 0.24", only: :dev, runtime: false},
-      {:surface, "~> 0.4", optional: true}
+      {:surface,
+       git: "https://github.com/surface-ui/surface", branch: "surface-next", optional: true}
     ]
   end
 

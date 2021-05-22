@@ -19,7 +19,7 @@ if Code.ensure_loaded?(Surface) do
         end
 
       ~H"""
-      {{ Heroicons.icon(@type, @name, opts) }}
+      { Heroicons.icon(@type, @name, opts) }
       """
     end
   end
