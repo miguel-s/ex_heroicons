@@ -1,13 +1,16 @@
 defmodule Heroicons.MixProject do
   use Mix.Project
 
+  @version "0.1.2"
+
   def project do
     [
       app: :ex_heroicons,
-      version: "0.1.2",
+      version: @version,
       elixir: "~> 1.11",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
+      docs: docs(),
       description: description(),
       package: package(),
       source_url: "https://github.com/miguel-s/ex_heroicons"
@@ -25,6 +28,21 @@ defmodule Heroicons.MixProject do
       {:phoenix_html, "~> 2.14"},
       {:ex_doc, "~> 0.24", only: :dev, runtime: false},
       {:surface, "~> 0.4", optional: true}
+    ]
+  end
+
+  defp docs do
+    [
+      main: "Heroicons",
+      source_ref: "v#{@version}",
+      source_url: "https://github.com/miguel-s/ex_heroicons",
+      groups_for_modules: [
+        Components: ~r/Heroicons.Component/
+      ],
+      nest_modules_by_prefix: [
+        Heroicons.Components
+      ],
+      extras: ["README.md"]
     ]
   end
 

@@ -1,3 +1,7 @@
+## v0.1.3 (2021-05-24)
+
+- Improve documentation
+
 ## v0.1.2 (2021-05-22)
 
 - Fix Surface Icon component error when not passing the class prop

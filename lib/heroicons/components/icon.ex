@@ -1,5 +1,13 @@
 if Code.ensure_loaded?(Surface) do
   defmodule Heroicons.Components.Icon do
+    @moduledoc """
+    A Surface component for rendering Heroicons.
+
+    ## Examples
+
+        <Heroicons.Components.Icon type="outline" name="academic-cap" class="h-4 w-4" />
+    """
+
     use Surface.Component
 
     @doc "The type of the icon"

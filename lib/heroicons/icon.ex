@@ -1,6 +1,11 @@
 defmodule Heroicons.Icon do
+  @moduledoc """
+  This module defines the data structure and functions for working with icons stored as SVG files.
+  """
+
   defstruct [:type, :name, :contents]
 
+  @doc "Parses a SVG file and returns structured data"
   def parse!(filename) do
     [type, name] = filename |> Path.split() |> Enum.take(-2)
 
