@@ -1,6 +1,6 @@
 # Heroicons
 
-This package adds a convenient way of using [Heroicons](https://heroicons.com/) with your Phoenix, Phoenix LiveView and Surface applications.
+This package adds a convenient way of using [Heroicons](https://heroicons.com) with your Phoenix, Phoenix LiveView and Surface applications.
 
 Heroicons is "A set of 450+ free MIT-licensed high-quality SVG icons for you to use in your web projects."
 Created by the amazing folks at [Tailwind Labs](https://github.com/tailwindlabs).
