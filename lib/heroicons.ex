@@ -43,6 +43,8 @@ defmodule Heroicons do
   @doc """
   Generates an icon.
 
+  All options are forwarded to the underlying SVG tag as HTML attributes.
+
   ## Options
 
     * `:class` - the css class added to the SVG tag
@@ -58,9 +60,10 @@ defmodule Heroicons do
   """
   def icon(type, name, opts \\ [])
 
-  for %{type: type, name: name, contents: contents} <- icons do
+  for %Icon{type: type, name: name, file: file} <- icons do
     def icon(unquote(type), unquote(name), opts) do
-      unquote(contents)
+      attrs = Icon.opts_to_attrs(opts)
+      Icon.insert_attrs(unquote(file), attrs)
     end
   end
 
