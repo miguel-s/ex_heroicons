@@ -19,16 +19,22 @@ if Code.ensure_loaded?(Surface) do
     @doc "The class of the icon"
     prop class, :css_class
 
+    @doc "All options are forwarded to the underlying SVG tag as HTML attributes"
+    prop opts, :keyword, default: []
+
     def render(assigns) do
-      opts =
-        case Map.get(assigns, :class) do
-          nil -> []
-          class -> [class: Surface.css_class(class)]
-        end
+      opts = class_to_opts(assigns) ++ assigns.opts
 
       ~H"""
       {{ Heroicons.icon(@type, @name, opts) }}
       """
+    end
+
+    defp class_to_opts(assigns) do
+      case Map.get(assigns, :class) do
+        nil -> []
+        class -> [class: Surface.css_class(class)]
+      end
     end
   end
 end
