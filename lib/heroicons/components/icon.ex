@@ -18,7 +18,7 @@ if Code.ensure_loaded?(Surface) do
           class -> [class: Surface.css_class(class)]
         end
 
-      ~H"""
+      ~F"""
       { Heroicons.icon(@type, @name, opts) }
       """
     end
