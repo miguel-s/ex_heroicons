@@ -3,9 +3,26 @@ defmodule Heroicons.Icon do
   This module defines the data structure and functions for working with icons stored as SVG files.
   """
 
+  alias __MODULE__
+
+  @doc """
+  Defines the Heroicons.Icon struct.
+
+  Its fields are:
+
+    * `:type` - the type of the icon
+
+    * `:name` - the name of the icon
+
+    * `:file` - the binary of the icon
+
+  """
   defstruct [:type, :name, :file]
 
+  @type t :: %Icon{type: String.t, name: String.t(), file: binary}
+
   @doc "Parses a SVG file and returns structured data"
+  @spec parse!(String.t()) :: Heroicons.Icon.t()
   def parse!(filename) do
     [type, name] = filename |> Path.split() |> Enum.take(-2)
     name = Path.rootname(name)
@@ -14,6 +31,7 @@ defmodule Heroicons.Icon do
   end
 
   @doc "Converts opts to HTML attributes"
+  @spec opts_to_attrs(keyword) :: list
   def opts_to_attrs(opts) do
     for {key, value} <- opts do
       key =
@@ -29,6 +47,7 @@ defmodule Heroicons.Icon do
   end
 
   @doc "Inserts HTML attributes into an SVG icon"
+  @spec insert_attrs(binary, keyword) :: Phoenix.HTML.safe()
   def insert_attrs("<svg" <> rest, attrs) do
     Phoenix.HTML.raw(["<svg", attrs, rest])
   end
