@@ -19,7 +19,7 @@ defmodule Heroicons.Icon do
   """
   defstruct [:type, :name, :file]
 
-  @type t :: %Icon{type: String.t, name: String.t(), file: binary}
+  @type t :: %Icon{type: String.t(), name: String.t(), file: binary}
 
   @doc "Parses a SVG file and returns structured data"
   @spec parse!(String.t()) :: Heroicons.Icon.t()
