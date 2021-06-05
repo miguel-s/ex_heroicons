@@ -22,7 +22,7 @@ defmodule Heroicons.Icon do
   @type t :: %Icon{type: String.t(), name: String.t(), file: binary}
 
   @doc "Parses a SVG file and returns structured data"
-  @spec parse!(String.t()) :: Heroicons.Icon.t()
+  @spec parse!(String.t()) :: Icon.t()
   def parse!(filename) do
     [type, name] = filename |> Path.split() |> Enum.take(-2)
     name = Path.rootname(name)

@@ -1,10 +1,23 @@
 defmodule Heroicons.Components.IconTest do
-  use ExUnit.Case, async: true
-  use Surface.LiveViewTest
+  use Heroicons.ConnCase, async: true
 
   alias Heroicons.Components.Icon
 
-  @endpoint Endpoint
+  defmodule ViewWithIcon do
+    use Surface.LiveView
+
+    data aria_hidden, :boolean, default: false
+
+    def handle_event("toggle_aria_hidden", _, socket) do
+      {:noreply, assign(socket, :aria_hidden, !socket.assigns.aria_hidden)}
+    end
+
+    def render(assigns) do
+      ~H"""
+      <Icon type="outline" name="academic-cap" opts={{ aria_hidden: @aria_hidden }} />
+      """
+    end
+  end
 
   test "renders icon" do
     html =
@@ -70,5 +83,17 @@ defmodule Heroicons.Components.IconTest do
         """
       end
     end
+  end
+
+  test "updates on new opts", %{conn: conn} do
+    {:ok, view, html} = live_isolated(conn, ViewWithIcon)
+
+    assert html =~ ~s(<svg aria-hidden="false")
+
+    assert render_click(view, :toggle_aria_hidden) =~
+             ~s(<svg aria-hidden="true")
+
+    assert render_click(view, :toggle_aria_hidden) =~
+             ~s(<svg aria-hidden="false")
   end
 end
