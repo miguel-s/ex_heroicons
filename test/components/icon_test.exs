@@ -85,7 +85,7 @@ defmodule Heroicons.Components.IconTest do
     end
   end
 
-  test "updates change tracking", %{conn: conn} do
+  test "updates when opts change", %{conn: conn} do
     {:ok, view, html} = live_isolated(conn, ViewWithIcon)
 
     assert html =~ ~s(<svg aria-hidden="false")
