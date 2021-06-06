@@ -5,16 +5,20 @@ if Code.ensure_loaded?(Surface) do
 
     ## Examples
 
-        <Heroicons.Components.Icon type="outline" name="academic-cap" class="h-4 w-4" />
+        <Heroicons.Components.Icon name="academic-cap" type="outline" class="h-4 w-4" />
     """
 
     use Surface.Component
 
-    @doc "The type of the icon"
-    prop type, :string, values: ["outline", "solid"], required: true
-
     @doc "The name of the icon"
     prop name, :string, required: true
+
+    @doc """
+    The type of the icon
+
+    Required if default type is not configured.
+    """
+    prop type, :string
 
     @doc "The class of the icon"
     prop class, :css_class
@@ -23,17 +27,27 @@ if Code.ensure_loaded?(Surface) do
     prop opts, :keyword, default: []
 
     def render(assigns) do
-      opts = class_to_opts(assigns) ++ assigns.opts
-
       ~H"""
-      {{ Heroicons.icon(@type, @name, opts) }}
+      {{ Heroicons.icon(@name, type_to_opts(@type) ++ class_to_opts(@class) ++ @opts) }}
       """
     end
 
-    defp class_to_opts(assigns) do
-      case Map.get(assigns, :class) do
-        nil -> []
-        class -> [class: Surface.css_class(class)]
+    defp type_to_opts(type) do
+      type = type || Heroicons.default_type()
+
+      unless type do
+        raise ArgumentError,
+              "type prop is required if default type is not configured."
+      end
+
+      [type: type]
+    end
+
+    defp class_to_opts(class) do
+      if class do
+        [class: Surface.css_class(class)]
+      else
+        []
       end
     end
   end

@@ -21,13 +21,19 @@ defmodule Heroicons do
 
   ## Usage
 
-  ### With Eex or Leex
+  #### With Eex or Leex
 
-      <%= Heroicons.icon("outline", "academic-cap", class: "h-4 w-4") %>
+      <%= Heroicons.icon("academic-cap", type: "outline", class: "h-4 w-4") %>
 
-  ### With Surface
+  #### With Surface
 
-      <Heroicons.Components.Icon type="outline" name="academic-cap" class="h-4 w-4" />
+      <Heroicons.Components.Icon name="academic-cap" type="outline" class="h-4 w-4" />
+
+  ## Config
+
+  Defaults can be set in the `Heroicons` application configuration.
+
+      config :ex_heroicons, type: "outline"
   """
 
   alias __MODULE__.Icon
@@ -40,36 +46,78 @@ defmodule Heroicons do
       Icon.parse!(icon_path)
     end
 
+  types = icons |> Enum.map(& &1.type) |> Enum.uniq()
+
+  @types types
+
+  @doc false
+  def types(), do: @types
+
+  @doc false
+  def default_type() do
+    case Application.get_env(:ex_heroicons, :type) do
+      nil ->
+        nil
+
+      type when is_binary(type) ->
+        if type in types() do
+          type
+        else
+          raise ArgumentError,
+                "expected default type to be one of #{inspect(types())}, got: #{inspect(type)}"
+        end
+
+      type ->
+        raise ArgumentError,
+              "expected default type to be one of #{inspect(types())}, got: #{inspect(type)}"
+    end
+  end
+
   @doc """
   Generates an icon.
 
-  All options are forwarded to the underlying SVG tag as HTML attributes.
+  Options may be passed through to the SVG tag for custom attributes.
 
   ## Options
 
+    * `:type` - the icon type. Accepted values are #{inspect(types)}. Required if default type is not configured.
     * `:class` - the css class added to the SVG tag
 
   ## Examples
 
-      icon("outline", "academic-cap", class: "h-4 w-4")
+      icon("academic-cap", type: "outline", class: "h-4 w-4")
       #=> <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path d="M12 14l9-5-9-5-9 5 9 5z"/>
             <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/>
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"/>
           </svg>
   """
-  @spec icon(String.t(), String.t(), keyword) :: Phoenix.HTML.safe()
-  def icon(type, name, opts \\ [])
+  @spec icon(String.t(), keyword) :: Phoenix.HTML.safe()
+  def icon(name, opts \\ []) when is_binary(name) and is_list(opts) do
+    {type, opts} = Keyword.pop(opts, :type, default_type())
+
+    unless type do
+      raise ArgumentError,
+            "expected type in options, got: #{inspect(opts)}"
+    end
+
+    unless type in types() do
+      raise ArgumentError,
+            "expected type to be one of #{inspect(types())}, got: #{inspect(type)}"
+    end
+
+    icon(type, name, opts)
+  end
 
   for %Icon{type: type, name: name, file: file} <- icons do
-    def icon(unquote(type), unquote(name), opts) do
+    defp icon(unquote(type), unquote(name), opts) do
       attrs = Icon.opts_to_attrs(opts)
       Icon.insert_attrs(unquote(file), attrs)
     end
   end
 
-  def icon(type, name, _opts) do
+  defp icon(type, name, _opts) do
     raise ArgumentError,
-          "icon of type #{inspect(type)} with name #{inspect(name)} does not exist."
+          "icon #{inspect(name)} with type #{inspect(type)} does not exist."
   end
 end
