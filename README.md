@@ -47,4 +47,4 @@ config :ex_heroicons, type: "outline"
 
 ## License
 
-MIT. See [LICENSE](https://github.com/miguel-s/ex_heroicon/blob/master/LICENSE) for more details.
+MIT. See [LICENSE](https://github.com/miguel-s/ex_heroicons/blob/master/LICENSE) for more details.
