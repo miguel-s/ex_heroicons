@@ -25,14 +25,26 @@ Then run `mix deps.get`.
 
 ## Usage
 
-### With Eex or Leex
+#### With Eex or Leex
 
 ```elixir
-<%= Heroicons.icon("outline", "academic-cap", class: "h-4 w-4") %>
+<%= Heroicons.icon("academic-cap", type: "outline", class: "h-4 w-4") %>
 ```
 
-### With Surface
+#### With Surface
 
 ```elixir
-<Heroicons.Components.Icon type="outline" name="academic-cap" class="h-4 w-4" />
+<Heroicons.Components.Icon name="academic-cap" type="outline" class="h-4 w-4" />
 ```
+
+## Config
+
+Defaults can be set in the `Heroicons` application configuration.
+
+```elixir
+config :ex_heroicons, type: "outline"
+```
+
+## License
+
+MIT. See [LICENSE](https://github.com/miguel-s/ex_heroicon/blob/master/LICENSE) for more details.
