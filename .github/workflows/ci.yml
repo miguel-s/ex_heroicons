@@ -4,7 +4,7 @@ on:
   pull_request:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   mix_test:
@@ -14,20 +14,13 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - elixir: 1.8.2
-            otp: 21.3.8.17
-          - elixir: 1.9.4
-            otp: 21.3.8.17
-            warnings_as_errors: true # not 1.10 as its --warnigs-as-errors has bugs https://github.com/elixir-lang/elixir/issues/10073
-          - elixir: 1.10.4
-            otp: 21.3.8.17
-          - elixir: 1.10.4
-            otp: 23.1.1
           - elixir: 1.11.1
             otp: 21.3.8.17
+            warnings-as-errors: true
           - elixir: 1.11.4
             otp: 23.2
             check_formatted: true
+            warnings-as-errors: true
           - elixir: 1.12.0-rc.0
             otp: 24.0-rc3
     env:
@@ -39,13 +32,16 @@ jobs:
           otp-version: ${{matrix.otp}}
           elixir-version: ${{matrix.elixir}}
           experimental-otp: true
+      - name: Install packages
+        run: |
+          sudo apt-get install -y -qq inotify-tools
       - name: Install Dependencies
         run: |
           mix local.hex --force
           mix local.rebar --force
           mix deps.get --only test
-      - run: mix compile --warnings-as-errors
-        if: matrix.warnings_as_errors
       - run: mix format --check-formatted
         if: matrix.check_formatted
+      - run: mix compile --warnings-as-errors
+        if: matrix.warnings_as_errors
       - run: mix test

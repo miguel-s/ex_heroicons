@@ -1,26 +1,54 @@
 if Code.ensure_loaded?(Surface) do
   defmodule Heroicons.Components.Icon do
-    use Surface.Component
+    @moduledoc """
+    A Surface component for rendering Heroicons.
 
-    @doc "The type of the icon"
-    prop type, :string, values: ["outline", "solid"], required: true
+    ## Examples
+
+        <Heroicons.Components.Icon name="academic-cap" type="outline" class="h-4 w-4" />
+    """
+
+    use Surface.Component
 
     @doc "The name of the icon"
     prop name, :string, required: true
 
+    @doc """
+    The type of the icon
+
+    Required if default type is not configured.
+    """
+    prop type, :string
+
     @doc "The class of the icon"
     prop class, :css_class
 
-    def render(assigns) do
-      opts =
-        case Map.get(assigns, :class) do
-          nil -> []
-          class -> [class: Surface.css_class(class)]
-        end
+    @doc "All options are forwarded to the underlying SVG tag as HTML attributes"
+    prop opts, :keyword, default: []
 
-      ~F"""
-      { Heroicons.icon(@type, @name, opts) }
+    def render(assigns) do
+      ~H"""
+      {{ Heroicons.icon(@name, type_to_opts(@type) ++ class_to_opts(@class) ++ @opts) }}
       """
+    end
+
+    defp type_to_opts(type) do
+      type = type || Heroicons.default_type()
+
+      unless type do
+        raise ArgumentError,
+              "type prop is required if default type is not configured."
+      end
+
+      [type: type]
+    end
+
+    defp class_to_opts(class) do
+      if class do
+        [class: Surface.css_class(class)]
+      else
+        []
+      end
     end
   end
 end
