@@ -1,3 +1,9 @@
+## v0.3.0-dev
+
+#### Breaking Changes
+
+- Upgraded to Surface v0.5.0
+
 ## v0.2.0 (2021-06-07)
 
 #### Breaking Changes

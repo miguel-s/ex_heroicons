@@ -27,8 +27,8 @@ if Code.ensure_loaded?(Surface) do
     prop opts, :keyword, default: []
 
     def render(assigns) do
-      ~H"""
-      {{ Heroicons.icon(@name, type_to_opts(@type) ++ class_to_opts(@class) ++ @opts) }}
+      ~F"""
+      {Heroicons.icon(@name, type_to_opts(@type) ++ class_to_opts(@class) ++ @opts)}
       """
     end
 
