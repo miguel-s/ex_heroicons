@@ -16,7 +16,7 @@ Add `ex_heroicons` to the list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:ex_heroicons, "~> 0.2.0"}
+    {:ex_heroicons, "~> 0.3.0"}
   ]
 end
 ```
