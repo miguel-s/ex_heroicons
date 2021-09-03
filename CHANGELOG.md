@@ -1,3 +1,7 @@
+## v0.3.1 (2021-09-03)
+
+- Added support for Phoenix HTML v0.3
+
 ## v0.3.0 (2021-06-18)
 
 #### Breaking Changes
