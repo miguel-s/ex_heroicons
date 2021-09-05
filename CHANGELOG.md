@@ -1,3 +1,17 @@
+## v0.4.0 (2021-09-05)
+
+- Upgraded to Phoenix HTML v3.0
+- Upgraded to Phoenix LiveView v0.16
+- Upgraded to Surface v0.5.2
+
+#### Breaking Changes
+
+- Renamed `Heroicons.Components.Icon` to `Heroicons.Surface.Icon`
+
+#### Enhancements
+
+- Added support for heex templates with a new Phoenix LiveView component `Heroicons.LiveView.icon`
+
 ## v0.3.1 (2021-09-03)
 
 - Added support for Phoenix HTML v0.3
