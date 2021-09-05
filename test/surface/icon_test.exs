@@ -1,7 +1,7 @@
-defmodule Heroicons.Components.IconTest do
+defmodule Heroicons.Surface.IconTest do
   use Heroicons.ConnCase, async: true
 
-  alias Heroicons.Components.Icon
+  alias Heroicons.Surface.Icon
 
   defmodule ViewWithIcon do
     use Surface.LiveView
@@ -112,10 +112,10 @@ defmodule Heroicons.Components.IconTest do
   end
 end
 
-defmodule Heroicons.Components.IconConfigTest do
+defmodule Heroicons.Surface.IconConfigTest do
   use Heroicons.ConnCase
 
-  alias Heroicons.Components.Icon
+  alias Heroicons.Surface.Icon
 
   test "renders icon with default type" do
     Application.put_env(:ex_heroicons, :type, "outline")

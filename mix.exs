@@ -43,10 +43,12 @@ defmodule Heroicons.MixProject do
       source_ref: "v#{@version}",
       source_url: "https://github.com/miguel-s/ex_heroicons",
       groups_for_modules: [
-        Components: ~r/Heroicons.Component/
+        Liveview: ~r/Heroicons.LiveView/,
+        Surface: ~r/Heroicons.Surface/
       ],
       nest_modules_by_prefix: [
-        Heroicons.Components
+        Heroicons.LiveView,
+        Heroicons.Surface
       ],
       extras: ["README.md"]
     ]

@@ -1,11 +1,11 @@
 if Code.ensure_loaded?(Surface) do
-  defmodule Heroicons.Components.Icon do
+  defmodule Heroicons.Surface.Icon do
     @moduledoc """
     A Surface component for rendering Heroicons.
 
     ## Examples
 
-        <Heroicons.Components.Icon name="academic-cap" type="outline" class="h-4 w-4" />
+        <Heroicons.Surface.Icon name="academic-cap" type="outline" class="h-4 w-4" />
     """
 
     use Surface.Component
@@ -27,13 +27,23 @@ if Code.ensure_loaded?(Surface) do
     prop opts, :keyword, default: []
 
     def render(assigns) do
+      type_opts = type_to_opts(assigns)
+      class_opts = class_to_opts(assigns)
+
+      opts =
+        assigns.opts
+        |> Keyword.merge(type_opts)
+        |> Keyword.merge(class_opts)
+
+      assigns = assign(assigns, opts: opts)
+
       ~F"""
-      {Heroicons.icon(@name, type_to_opts(@type) ++ class_to_opts(@class) ++ @opts)}
+      {Heroicons.icon(@name, @opts)}
       """
     end
 
-    defp type_to_opts(type) do
-      type = type || Heroicons.default_type()
+    defp type_to_opts(assigns) do
+      type = assigns[:type] || Heroicons.default_type()
 
       unless type do
         raise ArgumentError,
@@ -43,9 +53,9 @@ if Code.ensure_loaded?(Surface) do
       [type: type]
     end
 
-    defp class_to_opts(class) do
-      if class do
-        [class: Surface.css_class(class)]
+    defp class_to_opts(assigns) do
+      if assigns[:class] do
+        [class: Surface.css_class(assigns.class)]
       else
         []
       end

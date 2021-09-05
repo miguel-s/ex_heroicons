@@ -34,7 +34,7 @@ Then run `mix deps.get`.
 #### With Surface
 
 ```elixir
-<Heroicons.Components.Icon name="academic-cap" type="outline" class="h-4 w-4" />
+<Heroicons.Surface.Icon name="academic-cap" type="outline" class="h-4 w-4" />
 ```
 
 ## Config
