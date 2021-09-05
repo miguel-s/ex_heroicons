@@ -31,6 +31,12 @@ Then run `mix deps.get`.
 <%= Heroicons.icon("academic-cap", type: "outline", class: "h-4 w-4") %>
 ```
 
+#### With Heex
+
+```elixir
+<Heroicons.LiveView.icon name="academic-cap" type="outline" class="h-4 w-4" />
+```
+
 #### With Surface
 
 ```elixir
