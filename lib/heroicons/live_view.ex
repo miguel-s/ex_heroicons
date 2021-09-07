@@ -30,8 +30,6 @@ if Code.ensure_loaded?(Phoenix.LiveView) do
     defp type_to_opts(assigns) do
       type = assigns[:type] || Heroicons.default_type()
 
-      IO.inspect(type)
-
       unless type do
         raise ArgumentError,
               "type prop is required if default type is not configured."
