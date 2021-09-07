@@ -1,3 +1,7 @@
+## v0.4.1 (2021-09-07)
+
+- Removed `IO.inspect`
+
 ## v0.4.0 (2021-09-05)
 
 - Upgraded to Phoenix HTML v3.0
