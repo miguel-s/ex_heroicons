@@ -1,3 +1,7 @@
+## v0.4.2 (2021-09-25)
+
+- Upgraded to Heroicons v1.0.4
+
 ## v0.4.1 (2021-09-07)
 
 - Removed `IO.inspect`
