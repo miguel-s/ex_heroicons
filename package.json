@@ -8,7 +8,7 @@
     "test": "test"
   },
   "dependencies": {
-    "heroicons": "^1.0.1"
+    "heroicons": "^1.0.4"
   },
   "devDependencies": {},
   "scripts": {
