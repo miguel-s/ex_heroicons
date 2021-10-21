@@ -1,3 +1,8 @@
+## v0.5.0 (2021-10-21)
+
+- Upgraded to Surface v0.6.0
+- Removed support for Phoenix HTML v2
+
 ## v0.4.2 (2021-09-25)
 
 - Upgraded to Heroicons v1.0.4
