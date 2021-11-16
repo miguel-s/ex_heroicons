@@ -1,3 +1,8 @@
+## v0.5.1 (2021-11-16)
+
+- Added helper function `types/0` for listing available icon types
+- Added helper function `names/0` for listing available icon names
+
 ## v0.5.0 (2021-10-21)
 
 - Upgraded to Surface v0.6.0
