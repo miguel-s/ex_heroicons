@@ -51,11 +51,18 @@ defmodule Heroicons do
     end
 
   types = icons |> Enum.map(& &1.type) |> Enum.uniq()
+  names = icons |> Enum.map(& &1.name) |> Enum.uniq()
 
   @types types
+  @names names
 
-  @doc false
+  @doc "Returns a list of available icon types"
+  @spec types() :: [String.t()]
   def types(), do: @types
+
+  @doc "Returns a list of available icon names"
+  @spec names() :: [String.t()]
+  def names(), do: @names
 
   @doc false
   def default_type() do
