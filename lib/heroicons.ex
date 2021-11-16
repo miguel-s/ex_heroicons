@@ -13,7 +13,7 @@ defmodule Heroicons do
 
       def deps do
         [
-          {:ex_heroicons, "~> 0.5.0"}
+          {:ex_heroicons, "~> 0.5.1"}
         ]
       end
 
