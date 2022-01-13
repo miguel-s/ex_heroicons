@@ -1,7 +1,7 @@
 if Code.ensure_loaded?(Phoenix.LiveView) do
   defmodule Heroicons.LiveView do
     @moduledoc """
-    A Surface component for rendering Heroicons.
+    A LiveView component for rendering Heroicons.
 
     ## Examples
 
