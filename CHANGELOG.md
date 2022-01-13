@@ -1,3 +1,9 @@
+## v0.6.0 (2022-01-13)
+
+- Upgraded to Phoenix HTML v3.2
+- Upgraded to Phoenix LiveView v0.17
+- Upgraded to Surface v0.7
+
 ## v0.5.1 (2021-11-16)
 
 - Added helper function `types/0` for listing available icon types
