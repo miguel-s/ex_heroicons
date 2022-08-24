@@ -1,3 +1,8 @@
+## v0.7.0 (2022-08-xx)
+
+ - Upgraded to Heroicons v2.0.4
+ - introduce `"mini"` type for `20x20` icons (`solid` and `outline` are `24x24`)
+ 
 ## v0.6.0 (2022-01-13)
 
 - Upgraded to Phoenix HTML v3.2
