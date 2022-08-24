@@ -23,6 +23,8 @@ jobs:
             warnings-as-errors: true
           - elixir: 1.12.0-rc.0
             otp: 24.0-rc3
+          - elixir: 1.13.4
+            otp: 25.0
     env:
       MIX_ENV: test
     steps:
