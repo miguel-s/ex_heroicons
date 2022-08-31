@@ -1,3 +1,7 @@
+## v0.6.1 (2022-08-31)
+
+- Upgraded to Heroicons v1.0.6
+
 ## v0.6.0 (2022-01-13)
 
 - Upgraded to Phoenix HTML v3.2
