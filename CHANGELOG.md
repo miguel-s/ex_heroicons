@@ -1,3 +1,7 @@
+## v1.0.0 (2022-09-01)
+
+No changes
+
 ## v0.6.1 (2022-08-31)
 
 - Upgraded to Heroicons v1.0.6
