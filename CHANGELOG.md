@@ -1,6 +1,7 @@
 ## v2.0.0 (2022-09-13)
 
 - Upgraded to Heroicons v2.0.11
+- You can find the official Heroicons upgrade guide [here](https://github.com/tailwindlabs/heroicons/releases/tag/v2.0.0)
 
 ## v1.0.0 (2022-09-01)
 
