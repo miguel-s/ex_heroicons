@@ -9,7 +9,7 @@ Created by the amazing folks at [Tailwind Labs](https://github.com/tailwindlabs)
 
 You can find the original docs [here](https://heroicons.com) and repo [here](https://github.com/tailwindlabs/heroicons).
 
-Current Heroicons version: 1.0.6
+Current Heroicons version: 2.0.11
 
 ## Installation
 
