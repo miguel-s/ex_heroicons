@@ -24,9 +24,19 @@ defmodule Heroicons.Icon do
   @doc "Parses a SVG file and returns structured data"
   @spec parse!(String.t()) :: Icon.t()
   def parse!(filename) do
-    [type, name] = filename |> Path.split() |> Enum.take(-2)
+    [type, name] =
+      filename
+      |> Path.split()
+      |> Enum.take(-3)
+      |> case do
+        ["20", "solid", name] -> ["mini", name]
+        ["24", "solid", name] -> ["solid", name]
+        ["24", "outline", name] -> ["outline", name]
+      end
+
     name = Path.rootname(name)
     file = File.read!(filename)
+
     struct!(__MODULE__, type: type, name: name, file: file)
   end
 

@@ -7,7 +7,7 @@ defmodule Heroicons do
 
   You can find the original docs [here](https://heroicons.com) and repo [here](https://github.com/tailwindlabs/heroicons).
 
-  Current Heroicons version: 1.0.6
+  Current Heroicons version: 2.0.11
 
   ## Installation
 
@@ -15,7 +15,7 @@ defmodule Heroicons do
 
       def deps do
         [
-          {:ex_heroicons, "~> 1.0.0"}
+          {:ex_heroicons, "~> 2.0.0"}
         ]
       end
 

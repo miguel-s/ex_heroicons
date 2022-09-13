@@ -9,7 +9,7 @@ Created by the amazing folks at [Tailwind Labs](https://github.com/tailwindlabs)
 
 You can find the original docs [here](https://heroicons.com) and repo [here](https://github.com/tailwindlabs/heroicons).
 
-Current Heroicons version: 1.0.6
+Current Heroicons version: 2.0.11
 
 ## Installation
 
@@ -18,7 +18,7 @@ Add `ex_heroicons` to the list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:ex_heroicons, "~> 1.0.0"}
+    {:ex_heroicons, "~> 2.0.0"}
   ]
 end
 ```
