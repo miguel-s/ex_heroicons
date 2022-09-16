@@ -22,19 +22,15 @@ jobs:
             otp: 24.0
           - elixir: 1.13.4
             otp: 25.0
-            check_formatted: true
-            run_plugin_tests: true
-            warnings_as_errors: true
+            lint: true
           - elixir: 1.14.0
             otp: 25.0
-            check_formatted: true
-            run_plugin_tests: true
-            warnings_as_errors: true
+            lint: true
     env:
       MIX_ENV: test
     steps:
       - uses: actions/checkout@v2.3.2
-      - uses: actions/setup-elixir@v1.5.0
+      - uses: erlef/setup-beam@v1
         with:
           otp-version: ${{matrix.otp}}
           elixir-version: ${{matrix.elixir}}
@@ -48,7 +44,7 @@ jobs:
           mix local.rebar --force
           mix deps.get --only test
       - run: mix format --check-formatted
-        if: matrix.check_formatted
+        if: matrix.lint
       - run: mix compile --warnings-as-errors
-        if: matrix.warnings_as_errors
+        if: matrix.lint
       - run: mix test
