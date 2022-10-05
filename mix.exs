@@ -1,11 +1,11 @@
-defmodule Heroicons.MixProject do
+defmodule Phxicons.MixProject do
   use Mix.Project
 
-  @version "2.0.0"
+  @version "1.0.0"
 
   def project do
     [
-      app: :ex_heroicons,
+      app: :elixircl_phxicons,
       version: @version,
       elixir: "~> 1.11",
       elixirc_paths: elixirc_paths(Mix.env()),
@@ -14,7 +14,7 @@ defmodule Heroicons.MixProject do
       docs: docs(),
       description: description(),
       package: package(),
-      source_url: "https://github.com/miguel-s/ex_heroicons"
+      source_url: "https://github.com/elixircl/phxicons"
     ]
   end
 
@@ -39,16 +39,16 @@ defmodule Heroicons.MixProject do
 
   defp docs do
     [
-      main: "Heroicons",
+      main: "Phxicons",
       source_ref: "v#{@version}",
-      source_url: "https://github.com/miguel-s/ex_heroicons",
+      source_url: "https://github.com/elixircl/phxicons",
       groups_for_modules: [
-        Liveview: ~r/Heroicons.LiveView/,
-        Surface: ~r/Heroicons.Surface/
+        Liveview: ~r/Phxicons.LiveView/,
+        Surface: ~r/Phxicons.Surface/
       ],
       nest_modules_by_prefix: [
-        Heroicons.LiveView,
-        Heroicons.Surface
+        Phxicons.LiveView,
+        Phxicons.Surface
       ],
       extras: ["README.md"]
     ]
@@ -56,18 +56,19 @@ defmodule Heroicons.MixProject do
 
   defp description() do
     """
-    This package adds a convenient way of using Heroicons with your Phoenix, Phoenix LiveView and Surface applications.
+    This package adds a convenient way of using Phxicons with your Phoenix, Phoenix LiveView and Surface applications.
 
-    Heroicons is "A set of 450+ free MIT-licensed high-quality SVG icons for you to use in your web projects."
-    Created by the amazing folks at Tailwind Labs.
+    Phxicons is "A set of popular high-quality SVG icons for you to use in your web projects."
+
+    Icons are taken from the other projects, so please check each project licences accordingly.
     """
   end
 
   defp package do
     %{
-      files: ~w(lib node_modules .formatter.exs mix.exs README* LICENSE* CHANGELOG*),
+      files: ~w(lib priv icons .formatter.exs mix.exs README* LICENSE* CHANGELOG* VERSIONS*),
       licenses: ["MIT"],
-      links: %{"GitHub" => "https://github.com/miguel-s/ex_heroicons"}
+      links: %{"GitHub" => "https://github.com/elixircl/phxicons"}
     }
   end
 end
