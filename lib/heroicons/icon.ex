@@ -29,6 +29,7 @@ defmodule Heroicons.Icon do
       |> Path.split()
       |> Enum.take(-3)
       |> case do
+        ["16", "solid", name] -> ["micro", name]
         ["20", "solid", name] -> ["mini", name]
         ["24", "solid", name] -> ["solid", name]
         ["24", "outline", name] -> ["outline", name]

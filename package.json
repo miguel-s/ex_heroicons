@@ -1,6 +1,6 @@
 {
   "name": "ex_heroicons",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "ex_heroicons",
   "main": "index.js",
   "directories": {
@@ -8,7 +8,7 @@
     "test": "test"
   },
   "dependencies": {
-    "heroicons": "^2.0.11"
+    "heroicons": "2.1.1"
   },
   "devDependencies": {},
   "scripts": {
