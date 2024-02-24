@@ -1,7 +1,7 @@
 defmodule Heroicons.MixProject do
   use Mix.Project
 
-  @version "2.0.0"
+  @version "3.0.0"
 
   def project do
     [
@@ -29,11 +29,11 @@ defmodule Heroicons.MixProject do
 
   defp deps do
     [
-      {:phoenix_html, "~> 3.2"},
+      {:phoenix_html, "~> 3.2 or ~> 4.0"},
       {:ex_doc, "~> 0.27", only: :dev, runtime: false},
       {:floki, ">= 0.32.0", only: :test},
-      {:phoenix_live_view, "~> 0.17", optional: true},
-      {:surface, "~> 0.7", optional: true}
+      {:phoenix_live_view, "~> 0.20", optional: true},
+      {:surface, "~> 0.11", optional: true}
     ]
   end
 
