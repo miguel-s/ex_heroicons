@@ -1,13 +1,13 @@
 defmodule Heroicons.MixProject do
   use Mix.Project
 
-  @version "2.0.0"
+  @version "3.0.0-rc.0"
 
   def project do
     [
       app: :ex_heroicons,
       version: @version,
-      elixir: "~> 1.11",
+      elixir: "~> 1.14",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       deps: deps(),
@@ -29,11 +29,17 @@ defmodule Heroicons.MixProject do
 
   defp deps do
     [
-      {:phoenix_html, "~> 3.2"},
-      {:ex_doc, "~> 0.27", only: :dev, runtime: false},
-      {:floki, ">= 0.32.0", only: :test},
-      {:phoenix_live_view, "~> 0.17", optional: true},
-      {:surface, "~> 0.7", optional: true}
+      {:phoenix_live_view, "~> 0.20"},
+      {:ex_doc, "~> 0.34", only: :dev, runtime: false},
+      {:floki, ">= 0.36.0", only: :test},
+      {:heroicons,
+       github: "tailwindlabs/heroicons",
+       tag: "v2.1.5",
+       sparse: "optimized",
+       app: false,
+       compile: false,
+       depth: 1,
+       only: :test}
     ]
   end
 
@@ -42,14 +48,6 @@ defmodule Heroicons.MixProject do
       main: "Heroicons",
       source_ref: "v#{@version}",
       source_url: "https://github.com/miguel-s/ex_heroicons",
-      groups_for_modules: [
-        Liveview: ~r/Heroicons.LiveView/,
-        Surface: ~r/Heroicons.Surface/
-      ],
-      nest_modules_by_prefix: [
-        Heroicons.LiveView,
-        Heroicons.Surface
-      ],
       extras: ["README.md"]
     ]
   end
@@ -65,7 +63,7 @@ defmodule Heroicons.MixProject do
 
   defp package do
     %{
-      files: ~w(lib node_modules .formatter.exs mix.exs README* LICENSE* CHANGELOG*),
+      files: ~w(lib .formatter.exs mix.exs README* LICENSE* CHANGELOG*),
       licenses: ["MIT"],
       links: %{"GitHub" => "https://github.com/miguel-s/ex_heroicons"}
     }

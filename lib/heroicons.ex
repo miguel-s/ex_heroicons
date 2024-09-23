@@ -7,15 +7,20 @@ defmodule Heroicons do
 
   You can find the original docs [here](https://heroicons.com) and repo [here](https://github.com/tailwindlabs/heroicons).
 
-  Current Heroicons version: 2.0.11
-
   ## Installation
 
   Add `ex_heroicons` to the list of dependencies in `mix.exs`:
 
       def deps do
         [
-          {:ex_heroicons, "~> 2.0.0"}
+          {:ex_heroicons, "~> 3.0.0-rc.0"},
+          {:heroicons,
+            github: "tailwindlabs/heroicons",
+            tag: "v2.1.5",
+            sparse: "optimized",
+            app: false,
+            compile: false,
+            depth: 1}
         ]
       end
 
@@ -23,17 +28,7 @@ defmodule Heroicons do
 
   ## Usage
 
-  #### With Eex or Leex
-
-      <%= Heroicons.icon("academic-cap", type: "outline", class: "h-4 w-4") %>
-
-  #### With Heex
-
-      <Heroicons.LiveView.icon name="academic-cap" type="outline" class="h-4 w-4" />
-
-  #### With Surface
-
-      <Heroicons.Surface.Icon name="academic-cap" type="outline" class="h-4 w-4" />
+      <Heroicons.icon name="academic-cap" type="outline" class="h-4 w-4" />
 
   ## Config
 
@@ -42,9 +37,41 @@ defmodule Heroicons do
       config :ex_heroicons, type: "outline"
   """
 
-  alias __MODULE__.Icon
+  use Phoenix.Component
+  alias Heroicons.Icon
 
-  icon_paths = "node_modules/heroicons/**/*.svg" |> Path.wildcard()
+  heroicons_path =
+    if File.exists?("deps/heroicons") do
+      "deps/heroicons"
+    else
+      "../heroicons"
+    end
+
+  unless File.exists?(heroicons_path) do
+    raise """
+    Heroicons not found, please add the `heroicons` dependency to your project.
+
+    Add `heroicons` to the list of dependencies in `mix.exs`:
+
+      def deps do
+        [
+          ...,
+          {:heroicons,
+          github: "tailwindlabs/heroicons",
+          tag: "v2.1.5",
+          sparse: "optimized",
+          app: false,
+          compile: false,
+          depth: 1}
+        ]
+      end
+    """
+  end
+
+  icon_paths =
+    heroicons_path
+    |> Path.join("optimized/**/*.svg")
+    |> Path.wildcard()
 
   icons =
     for icon_path <- icon_paths do
@@ -55,82 +82,94 @@ defmodule Heroicons do
   types = icons |> Enum.map(& &1.type) |> Enum.uniq()
   names = icons |> Enum.map(& &1.name) |> Enum.uniq()
 
-  @types types
-  @names names
-
-  @doc "Returns a list of available icon types"
-  @spec types() :: [String.t()]
-  def types(), do: @types
-
-  @doc "Returns a list of available icon names"
-  @spec names() :: [String.t()]
-  def names(), do: @names
-
-  @doc false
-  def default_type() do
-    case Application.get_env(:ex_heroicons, :type) do
+  default_type =
+    case Application.compile_env(:ex_heroicons, :type) do
       nil ->
-        nil
+        "outline"
 
       type when is_binary(type) ->
-        if type in types() do
+        if type in types do
           type
         else
           raise ArgumentError,
-                "expected default type to be one of #{inspect(types())}, got: #{inspect(type)}"
+                "expected default type to be one of #{inspect(types)}, got: #{inspect(type)}"
         end
 
       type ->
         raise ArgumentError,
-              "expected default type to be one of #{inspect(types())}, got: #{inspect(type)}"
+              "expected default type to be one of #{inspect(types)}, got: #{inspect(type)}"
     end
-  end
 
-  @doc """
-  Generates an icon.
+  @names names
+  def names, do: @names
 
-  Options may be passed through to the SVG tag for custom attributes.
+  @types types
+  def types, do: @types
 
-  ## Options
+  attr :name, :string, values: @names, required: true, doc: "the name of the icon"
+  attr :type, :string, values: types, default: default_type, doc: "the type of the icon"
+  attr :class, :string, default: nil, doc: "the css classes to add to the svg container"
+  attr :rest, :global, doc: "the arbitrary HTML attributes to add to the svg container"
 
-    * `:type` - the icon type. Accepted values are #{inspect(types)}. Required if default type is not configured.
-    * `:class` - the css class added to the SVG tag
+  def icon(assigns) do
+    name = assigns[:name]
 
-  ## Examples
-
-      icon("academic-cap", type: "outline", class: "h-4 w-4")
-      #=> <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path d="M12 14l9-5-9-5-9 5 9 5z"/>
-            <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/>
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"/>
-          </svg>
-  """
-  @spec icon(String.t(), keyword) :: Phoenix.HTML.safe()
-  def icon(name, opts \\ []) when is_binary(name) and is_list(opts) do
-    {type, opts} = Keyword.pop(opts, :type, default_type())
-
-    unless type do
+    if name == nil or name not in @names do
       raise ArgumentError,
-            "expected type in options, got: #{inspect(opts)}"
+            "expected icon name to be one of #{inspect(unquote(@names))}, got: #{inspect(name)}"
     end
 
-    unless type in types() do
+    type = assigns[:type]
+
+    if type == nil or type not in @types do
       raise ArgumentError,
-            "expected type to be one of #{inspect(types())}, got: #{inspect(type)}"
+            "expected icon type to be one of #{inspect(unquote(@types))}, got: #{inspect(type)}"
     end
 
-    icon(type, name, opts)
+    ~H"""
+    <!-- heroicons-<%= @type %>-<%= @name %> -->
+    <.svg_container type={@type} class={@class} {@rest}>
+      <%= {:safe, svg_body(@name, @type)} %>
+    </.svg_container>
+    """
   end
 
-  for %Icon{type: type, name: name, file: file} <- icons do
-    defp icon(unquote(type), unquote(name), opts) do
-      attrs = Icon.opts_to_attrs(opts)
-      Icon.insert_attrs(unquote(file), attrs)
+  attr :type, :string, values: types, default: default_type, doc: "the type of the icon"
+  attr :class, :string, default: nil, doc: "the css classes to add to the svg container"
+  attr :rest, :global, doc: "the arbitrary HTML attributes to add to the svg container"
+
+  slot :inner_block, required: true, doc: "the svg paths to render inside the svg container"
+
+  defp svg_container(assigns) do
+    ~H"""
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox={svg_viewbox(@type)}
+      stroke-width="1.5"
+      stroke="currentColor"
+      aria-hidden="true"
+      data-slot="icon"
+      class={@class}
+      {@rest}
+    >
+      <%= render_slot(@inner_block) %>
+    </svg>
+    """
+  end
+
+  defp svg_viewbox(type) do
+    case type do
+      "micro" -> "0 0 16 16"
+      "mini" -> "0 0 20 20"
+      "solid" -> "0 0 24 24"
+      "outline" -> "0 0 24 24"
     end
   end
 
-  defp icon(type, name, _opts) do
-    raise ArgumentError,
-          "icon #{inspect(name)} with type #{inspect(type)} does not exist."
+  for %Icon{name: name, type: type, file: file} <- icons do
+    defp svg_body(unquote(name), unquote(type)) do
+      unquote(file)
+    end
   end
 end

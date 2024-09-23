@@ -1,64 +1,78 @@
 defmodule HeroiconsTest do
   use ExUnit.Case, async: true
+  import Phoenix.Component
+  import Phoenix.LiveViewTest
   doctest Heroicons
 
   test "renders icon" do
-    assert Heroicons.icon("academic-cap", type: "outline")
-           |> Phoenix.HTML.safe_to_string() =~ "<svg"
+    assigns = %{}
+    html = rendered_to_string(~H[<Heroicons.icon name="academic-cap" />])
+
+    assert html =~
+             ~s(<!-- heroicons-outline-academic-cap -->\n<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon" class="">\n  \n  <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5"/>\n\n</svg>)
   end
-
-  test "renders icon with attribute" do
-    assert Heroicons.icon("academic-cap", type: "outline", class: "h-4 w-4")
-           |> Phoenix.HTML.safe_to_string() =~ ~s(<svg class="h-4 w-4")
-  end
-
-  test "converts opts to attributes" do
-    assert Heroicons.icon("academic-cap", type: "outline", aria_hidden: true)
-           |> Phoenix.HTML.safe_to_string() =~ ~s(<svg aria-hidden="true")
-  end
-
-  test "raises if icon name does not exist" do
-    msg = ~s(icon "hello" with type "outline" does not exist.)
-
-    assert_raise ArgumentError, msg, fn ->
-      Heroicons.icon("hello", type: "outline")
-    end
-  end
-
-  test "raises if type is missing" do
-    msg = ~s(expected type in options, got: [])
-
-    assert_raise ArgumentError, msg, fn ->
-      Heroicons.icon("academic-cap")
-    end
-  end
-
-  test "raises if icon type does not exist" do
-    msg = ~s(expected type to be one of #{inspect(Heroicons.types())}, got: "world")
-
-    assert_raise ArgumentError, msg, fn ->
-      Heroicons.icon("academic-cap", type: "world")
-    end
-  end
-end
-
-defmodule HeroiconsConfigTest do
-  use ExUnit.Case
 
   test "renders icon with default type" do
-    Application.put_env(:ex_heroicons, :type, "outline")
-
-    assert Heroicons.icon("academic-cap")
-           |> Phoenix.HTML.safe_to_string() =~ "<svg"
+    assigns = %{}
+    html = rendered_to_string(~H[<Heroicons.icon name="academic-cap" />])
+    assert html =~ ~s(heroicons-outline-academic-cap)
   end
 
-  test "raises if default icon type does not exist" do
-    Application.put_env(:ex_heroicons, :type, "world")
+  test "renders icon with explicit type" do
+    assigns = %{}
+    html = rendered_to_string(~H[<Heroicons.icon name="academic-cap" type="solid" />])
+    assert html =~ ~s(heroicons-solid-academic-cap)
+  end
 
-    msg = ~s(expected default type to be one of #{inspect(Heroicons.types())}, got: "world")
+  test "renders icon with class" do
+    assigns = %{}
+    html = rendered_to_string(~H[<Heroicons.icon name="academic-cap" class="h-4 w-4" />])
+    assert html =~ ~s(class="h-4 w-4")
+  end
 
-    assert_raise ArgumentError, msg, fn ->
-      Heroicons.icon("academic-cap")
-    end
+  test "renders icon with global attributes" do
+    assigns = %{}
+    html = rendered_to_string(~H[<Heroicons.icon name="academic-cap" aria-hidden="true" />])
+    assert html =~ ~s(aria-hidden="true")
+  end
+
+  test "raises when icon name is not found" do
+    assigns = %{}
+
+    assert_raise ArgumentError,
+                 "expected icon name to be one of #{inspect(Heroicons.names())}, got: nil",
+                 fn ->
+                   rendered_to_string(~H[<Heroicons.icon />])
+                 end
+  end
+
+  test "raises when icon name is invalid" do
+    assigns = %{}
+
+    assert_raise ArgumentError,
+                 "expected icon name to be one of #{inspect(Heroicons.names())}, got: \"invalid\"",
+                 fn ->
+                   rendered_to_string(~H[<Heroicons.icon name="invalid" />])
+                 end
+  end
+
+  test "raises when icon type is not found" do
+    assigns = %{}
+
+    assert_raise ArgumentError,
+                 "expected icon type to be one of #{inspect(Heroicons.types())}, got: nil",
+                 fn ->
+                   rendered_to_string(~H[<Heroicons.icon name="academic-cap" type={nil} />])
+                 end
+  end
+
+  test "raises when icon type is invalid" do
+    assigns = %{}
+
+    assert_raise ArgumentError,
+                 "expected icon type to be one of #{inspect(Heroicons.types())}, got: \"invalid\"",
+                 fn ->
+                   rendered_to_string(~H[<Heroicons.icon name="academic-cap" type="invalid" />])
+                 end
   end
 end

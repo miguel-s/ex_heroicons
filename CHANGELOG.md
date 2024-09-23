@@ -1,3 +1,14 @@
+## v3.0.0-rc.0 (2024-09-23)
+
+- Upgraded to Heroicons v2.1.5 and include new micro icons
+- Upgraded to Surface v0.11
+- Removed Phoenix HTML dependency
+- Removed dependency on npm and node_modules
+
+### Breaking changes
+
+- Removed `Heroicons.LiveView.icon` and `Heroicons.Surface.Icon` in favor of `Heroicons.icon`
+
 ## v2.0.0 (2022-09-13)
 
 - Upgraded to Heroicons v2.0.11
