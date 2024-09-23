@@ -107,7 +107,7 @@ defmodule Heroicons do
   def types, do: @types
 
   attr :name, :string, values: @names, required: true, doc: "the name of the icon"
-  attr :type, :string, values: types, default: default_type, doc: "the type of the icon"
+  attr :type, :string, values: @types, default: default_type, doc: "the type of the icon"
   attr :class, :string, default: nil, doc: "the css classes to add to the svg container"
   attr :rest, :global, doc: "the arbitrary HTML attributes to add to the svg container"
 
@@ -134,7 +134,7 @@ defmodule Heroicons do
     """
   end
 
-  attr :type, :string, values: types, default: default_type, doc: "the type of the icon"
+  attr :type, :string, values: @types, default: default_type, doc: "the type of the icon"
   attr :class, :string, default: nil, doc: "the css classes to add to the svg container"
   attr :rest, :global, doc: "the arbitrary HTML attributes to add to the svg container"
 
