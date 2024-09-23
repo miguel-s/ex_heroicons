@@ -9,6 +9,33 @@
 
 - Removed `Heroicons.LiveView.icon` and `Heroicons.Surface.Icon` in favor of `Heroicons.icon`
 
+### Migrating to v3
+
+Update the `ex_heroicons` dependency
+
+```elixir
+{:ex_heroicons, "~> 3.0.0-rc.0"},
+```
+
+Add the `heroicons` dependency
+
+```elixir
+{:heroicons,
+    github: "tailwindlabs/heroicons",
+    tag: "v2.1.5",
+    sparse: "optimized",
+    app: false,
+    compile: false,
+    depth: 1}
+```
+
+Replace the LiveView and Surface components with the new functional component
+
+```diff
+- <Heroicons.LiveView.icon name="academic-cap" class="h-4 w-4" />
++ <Heroicons.icon name="academic-cap" class="h-4 w-4" />
+```
+
 ## v2.0.0 (2022-09-13)
 
 - Upgraded to Heroicons v2.0.11
