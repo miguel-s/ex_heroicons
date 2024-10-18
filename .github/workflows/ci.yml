@@ -14,15 +14,6 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - elixir: 1.12.3
-            otp: 23.3
-          - elixir: 1.12.3
-            otp: 24.0
-          - elixir: 1.13.4
-            otp: 24.0
-          - elixir: 1.13.4
-            otp: 25.0
-            lint: true
           - elixir: 1.14.0
             otp: 25.0
             lint: true
@@ -34,7 +25,6 @@ jobs:
         with:
           otp-version: ${{matrix.otp}}
           elixir-version: ${{matrix.elixir}}
-          experimental-otp: true
       - name: Install packages
         run: |
           sudo apt-get install -y -qq inotify-tools
