@@ -9,16 +9,21 @@ Created by the amazing folks at [Tailwind Labs](https://github.com/tailwindlabs)
 
 You can find the original docs [here](https://heroicons.com) and repo [here](https://github.com/tailwindlabs/heroicons).
 
-Current Heroicons version: 2.0.11
-
 ## Installation
 
-Add `ex_heroicons` to the list of dependencies in `mix.exs`:
+Add `herocions` and `ex_heroicons` to the list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
   [
-    {:ex_heroicons, "~> 2.0.0"}
+    {:ex_heroicons, "~> 3.0.0"},
+    {:heroicons,
+       github: "tailwindlabs/heroicons",
+       tag: "v2.1.5",
+       sparse: "optimized",
+       app: false,
+       compile: false,
+       depth: 1}
   ]
 end
 ```
@@ -27,22 +32,8 @@ Then run `mix deps.get`.
 
 ## Usage
 
-#### With Eex or Leex
-
 ```elixir
-<%= Heroicons.icon("academic-cap", type: "outline", class: "h-4 w-4") %>
-```
-
-#### With Heex
-
-```elixir
-<Heroicons.LiveView.icon name="academic-cap" type="outline" class="h-4 w-4" />
-```
-
-#### With Surface
-
-```elixir
-<Heroicons.Surface.Icon name="academic-cap" type="outline" class="h-4 w-4" />
+<Heroicons.icon name="academic-cap" type="outline" class="h-4 w-4" />
 ```
 
 ## Config
