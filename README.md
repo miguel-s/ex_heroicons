@@ -16,7 +16,7 @@ Add `herocions` and `ex_heroicons` to the list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:ex_heroicons, "~> 3.0.0-rc.0"},
+    {:ex_heroicons, "~> 3.0.0"},
     {:heroicons,
        github: "tailwindlabs/heroicons",
        tag: "v2.1.5",
