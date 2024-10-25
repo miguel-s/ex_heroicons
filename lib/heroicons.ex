@@ -9,7 +9,7 @@ defmodule Heroicons do
 
   ## Installation
 
-  Add `ex_heroicons` to the list of dependencies in `mix.exs`:
+  Add `ex_heroicons` and `heroicons` to the list of dependencies in `mix.exs`:
 
       def deps do
         [

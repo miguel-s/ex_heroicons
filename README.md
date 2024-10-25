@@ -11,7 +11,7 @@ You can find the original docs [here](https://heroicons.com) and repo [here](htt
 
 ## Installation
 
-Add `herocions` and `ex_heroicons` to the list of dependencies in `mix.exs`:
+Add `ex_heroicons` and `heroicons` to the list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
