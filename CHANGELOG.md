@@ -1,3 +1,7 @@
+## v3.1.0 (2024-12-12)
+
+- Added support for Phoenix LiveView v1.0
+
 ## v3.0.0 (2024-10-18)
 
 - Upgraded to Heroicons v2.1.5 and include new micro icons
@@ -14,7 +18,7 @@
 Update the `ex_heroicons` dependency
 
 ```elixir
-{:ex_heroicons, "~> 3.0.0"},
+{:ex_heroicons, "~> 3.1.0"},
 ```
 
 Add the `heroicons` dependency
