@@ -30,7 +30,7 @@ defmodule Heroicons.MixProject do
   defp deps do
     [
       {:phoenix_live_view, "~> 0.20 or ~> 1.0"},
-      {:ex_doc, "~> 0.34", only: :dev, runtime: false},
+      {:ex_doc, "~> 0.35", only: :dev, runtime: false},
       {:floki, ">= 0.36.0", only: :test},
       {:heroicons,
        github: "tailwindlabs/heroicons",
